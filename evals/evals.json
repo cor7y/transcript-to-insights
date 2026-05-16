@@ -1,0 +1,23 @@
+{
+  "skill_name": "transcript-to-insights",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "请对以下清洗后的工厂调研会议转录进行洞察提取和用户画像分析。\n\n---\n\n发言人 1\n我们现在用的系统是2018年上的，当时花了不少钱，但说实话，一线的人基本不用，都是我们这边手动录数据进去，然后出报表给老板看。\n\n发言人 2\n对，我们车间那边，师傅们觉得这个系统太复杂，而且出了问题也不知道找谁，IT那边说是业务问题，业务那边说是系统问题，最后都是我们自己想办法。\n\n发言人 1\n其实我觉得AI这个东西，如果真的能帮我们减少返工，我是支持的。但你得先让我看到效果，不能说你们系统很厉害，然后上线之后发现根本不适合我们的工艺。\n\n发言人 3\n我们之前也试过一个视觉检测的方案，供应商说准确率98%，结果在我们这里跑下来也就80%多，后来就放弃了。现在老板又在说要搞AI，我们都有点怕。\n\n发言人 2\n而且说实话，如果AI真的能替代一些工序，我们这边的人怎么办？这个问题没人跟我们说清楚。\n\n发言人 1\n我倒不是怕被替代，我是怕又是一个面子工程，搞了半年，最后还是回到老路子。\n\n发言人 3\n对，我们厂里搞过太多这种项目了，每次都说这次不一样，但最后都是一样的结局。\n\n---\n\n请提取洞察（5-8条）和用户画像（3-5个原型）。",
+      "expected_output": "Should produce 5-8 condensed insights that reveal WHY behind behaviors (not just what was said), and 3-5 behavioral archetypes named by behavioral trait (not job title). Insights should identify tensions like 'proof-first skepticism', 'accountability vacuum', 'initiative fatigue'. Archetypes should NOT say things like 'responsible for data entry' — they should describe behavioral patterns like 'The Burned Pragmatist' or 'The Accountability Avoider'.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "以下是一段企业数字化转型调研的访谈转录，请提取洞察和用户画像。\n\n---\n\n发言人 1（IT部门负责人）\n我们现在最大的问题是数据孤岛，每个部门都有自己的系统，要做一个跨部门的报表，得手动从五六个地方导数据，然后在Excel里拼。这个事情每周都要做，每次都要花半天。\n\n发言人 2（生产部门主管）\n IT那边说要统一数据平台，但我们生产这边有自己的节奏，不能因为IT的项目影响我们的生产计划。上次他们搞系统升级，停了两天，我们损失很大。\n\n发言人 3（财务）\n我们财务这边其实不太关心用什么系统，我们关心的是数字准不准，能不能对上。现在每个月月底对账都是噩梦，因为各个系统的口径不一样。\n\n发言人 1\n其实我们IT也知道这些问题，但我们的资源有限，老板说要做AI，但基础数据都没治好，AI能做什么？\n\n发言人 2\n说实话，我们生产这边对AI没什么概念，就知道老板在说这个词。如果AI能帮我们减少停机时间，那是真的有用，其他的我不太关心。\n\n发言人 3\n我倒是觉得AI可以帮我们做对账，但前提是数据要干净。现在数据这么乱，AI也没用。\n\n---\n\n请提取洞察和用户画像。",
+      "expected_output": "Insights should reveal structural tensions: e.g., 'AI ambition built on broken data foundations', 'each department optimizes locally, creating system-wide dysfunction'. Archetypes should capture behavioral patterns like 'The Infrastructure Realist' (IT), 'The Production Protector' (ops), 'The Accuracy Anchor' (finance) — not just 'IT manager', 'production head', 'finance person'. Key test: do the archetypes have a 'key tension' that makes them interesting beyond their job function?",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "这是一段关于工厂质检流程的深度访谈，受访者是一位有20年经验的质检班长。请提取洞察和用户画像。\n\n---\n\n发言人 1（质检班长）\n我做质检二十年了，这个活儿说难不难，说简单也不简单。你看这个缺陷，我一眼就能看出来，但你要让我说清楚为什么，我说不清楚，就是经验。\n\n发言人 2（调研员）\n那如果用AI来做这个判断，你觉得可行吗？\n\n发言人 1\n可行是可行，但你得先把我的经验教给它。问题是我的经验怎么教？我自己都说不清楚。而且这个缺陷，今天这批料和昨天那批料，看起来一样，但处理方式不一样，这个AI能懂吗？\n\n发言人 2\n如果AI的准确率能达到你的水平呢？\n\n发言人 1\n那我就可以去做更重要的事了。现在我每天80%的时间都在看这些基础的东西，真正需要我判断的复杂情况，可能就10%。但那10%出了问题，损失是最大的。\n\n发言人 2\n你担心AI会取代你吗？\n\n发言人 1\n不担心。我担心的是它出了错没人负责。现在出了问题，是我的责任，我知道怎么处理。AI出了问题，谁负责？\n\n---\n\n请提取洞察和用户画像。",
+      "expected_output": "This is a single-speaker interview, so archetypes should focus on this one person's behavioral profile rather than contrasting multiple types. Key insight to surface: tacit knowledge cannot be articulated by its holder — the expert can't teach what they know. Another: accountability is not just about blame, it's about having a clear owner when things go wrong. The archetype should NOT be 'quality inspector with 20 years experience' — it should be something like 'The Tacit Expert' or 'The Accountability Anchor', with a key tension around knowledge transfer and responsibility.",
+      "files": []
+    }
+  ]
+}
