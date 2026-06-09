@@ -1,213 +1,99 @@
 ---
 name: transcript-to-insights
 description: >
-  Analyze meeting/interview transcripts to extract structured research outputs: business context,
-  user personas, behavioral archetypes, and insights.
-  Use this skill whenever the user has qualitative research transcripts (meeting notes, user interviews,
-  field research, stakeholder conversations) and wants to synthesize findings.
+  Analyze meeting/interview transcripts to extract structured outputs based on scenarios and user-defined goals.
 ---
 
-# Transcript-to-Insights Analysis
+# 调研会议转录文稿提取与分析
 
-You are a qualitative research analyst. A transcript can yield up to four types of output — but not every transcript supports all four. Your first job is to assess what the material actually contains, then produce only what's grounded in the data.
+核心目标：先与用户对齐“场景和提取目标”，随后基于该目标从转录稿中提取对应的事实、结构化信息和深层洞察。
 
-**Four output types:**
-1. **业务场景** — The operational reality: what the business does, how it works, what constraints it operates under
-2. **用户画像** — Concrete profiles of the people: who they are, what they do day-to-day, what tools they use, what frustrates them
-3. **行为原型** — Abstract behavioral patterns: how people relate to change, authority, risk, and technology
-4. **洞察** — Non-obvious interpretations: tensions, contradictions, and unmet needs that explain WHY things are the way they are
+## 第一步：确认场景与目标
 
----
+**开始提取前，必须先询问文稿的场景和目标。**
+向用户提供以下选项：
+1. **会议纪要**（侧重：关键议题、各方观点、决议与后续行动项）
+2. **业务流程理解**（侧重：核心业务、断点流程、现有系统工具、结构性约束）
+3. **用户洞察**（侧重：用户画像、行为原型、核心动机与深层张力）
+4. **功能反馈**（侧重：系统使用痛点、新功能期望、具体使用场景）
+5. **内部讨论**（侧重：核心分歧、达成的共识、各方立场与视角、待决事项）
+6. **自定义目标**（用户自行描述的特定关注点）
 
-## Step 0: Assess what the transcript supports
+*⚠️ 注意：必须等待用户回复并确认目标后，再动态组织后续的提取框架并开始生成报告。*
 
-Before producing any output, read the transcript and ask:
+## 产出物与行为模式
 
-- Does it describe the business's operations, systems, or processes in enough detail? → **业务场景** is viable
-- Do speakers describe their own work, tools, or daily reality in enough detail? → **用户画像** is viable
-- Are there enough speakers (or enough behavioral richness in one speaker) to identify a meaningful pattern? → **行为原型** is viable
-- Are there surprising statements, contradictions, or tensions that go beyond what's obvious? → **洞察** is viable
+无论输入什么文件（如 `xxx_cleaned.md`），默认在同级目录生成提取报告，命名为 `xxx_insights.md`
+*纪律红线：如果原稿材料不足以支撑用户指定的目标模块，直接跳过并注明“材料不足”，严禁脑补发散。*
 
-**If a section isn't supported by the material, skip it entirely.** Don't produce thin outputs to fill a template. A note like "本次转录不足以支撑用户画像" is more useful than a fabricated profile.
+## 动态提取框架（按目标适配）
 
----
+不要僵化输出固定模块。根据用户选择的目标，从以下备选模块中组合或自定义输出格式：
 
-## 业务场景 (Business Context)
-
-Describe the operational reality as it emerges from the transcript. This is factual and descriptive — what is actually happening, not what should be happening.
-
-**What to capture:**
-- Core business activity and what success looks like for them
-- Key workflows or processes mentioned (especially the ones that are broken or manual)
-- Systems and tools currently in use
-- Structural constraints: org structure, decision-making flow, accountability gaps
-- Where technology fits (or doesn't) in their current reality
-
-**What to avoid:**
-- Don't describe the industry in general — describe *this* organization as revealed in *this* transcript
-- Don't fill gaps with assumptions; if something wasn't mentioned, don't include it
-
-**Output format:**
-```
-## 业务场景
-
-**核心业务：** [What they do and what operational success means to them]
-
-**关键流程：** [The workflows that came up — especially broken or manual ones]
-
-**现有系统与工具：** [What they're using now]
-
-**结构性约束：** [Org, decision-making, accountability structures that shape behavior]
-
-**技术现状：** [Where digital/AI fits in their current reality — or why it doesn't]
+### 备选 A：会议纪要类
+```markdown
+## 核心议题与决议
+**关键讨论点：** [议题与各方观点概要]
+**达成决议：** [明确的决定事项]
+**Next Steps：** [后续行动项、负责人及时间节点]
 ```
 
----
-
-## 用户画像 (User Personas)
-
-Concrete profiles grounded in what speakers explicitly said about their work. One persona per distinct role or perspective in the transcript.
-
-The difference from archetypes: a persona describes *who this person is and what their work looks like*. An archetype describes *how they behave in relation to change or technology*. A transcript might support one without the other.
-
-**What to capture:**
-- Role and position in the organization (use what was said, not inferred titles)
-- Daily workflow: what do they actually do? What takes most of their time?
-- Tools and systems they interact with
-- Pain points: what slows them down, frustrates them, or creates risk for them
-- Goals: what are they trying to achieve in their work?
-
-**What to avoid:**
-- Don't invent workflow details that weren't mentioned
-- Don't conflate two speakers into one persona if their situations differ
-- Don't describe what they're "responsible for" in org-chart language — describe what they actually do
-
-**Output format:**
-```
-## 用户画像
-
-### [Role label — descriptive, not a job title]
-**身份：** [Their position and context in the organization, as described]
-**日常工作：** [What they actually do — the tasks, the rhythm, the tools]
-**痛点：** [What frustrates them or creates friction in their work]
-**目标：** [What they're trying to achieve — immediate and longer-term]
-**信息来源：** [Where they get information to make decisions, if mentioned]
+### 备选 B：业务流程类
+```markdown
+## 业务场景与现状
+**核心业务与流程：** [关键工作流，特别是断裂或手工的部分]
+**现有系统与工具：** [正在使用的系统]
+**结构性约束：** [组织架构、决策流、权责分布]
 ```
 
----
+### 备选 C：用户洞察类 (Personas & Archetypes)
+```markdown
+## 用户画像与痛点
+**角色/身份：** [组织内的位置及实际做的事]
+**痛点与目标：** [阻碍、摩擦因素以及他们想达成的目标]
 
-## 行为原型 (Behavioral Archetypes)
-
-Abstract behavioral patterns — how people relate to change, authority, risk, and technology. More interpretive than personas; requires enough behavioral signal to generalize.
-
-An archetype is NOT a job title with a description. It is a behavioral pattern — a way of relating to the world.
-
-**Bad archetype:**
-> 发言人2 — 负责参观引导，了解公司整体情况
-
-**Good archetype:**
-> **The Translator** — Sits at the boundary between management directives and floor reality. Doesn't make decisions but controls what information flows in each direction. Primary concern: maintaining credibility with both sides without being blamed when things go wrong.
-
-**When to skip archetypes:** If there's only one speaker and their behavioral pattern isn't rich enough to generalize, or if all speakers behave similarly (no meaningful variation), skip this section.
-
-### Archetype modeling process
-
-**Step 1: Define behavioral axes** — Identify 2–3 dimensions where you actually see variation across participants. Examples for factory/AI research:
-- Relationship to new technology: Eager adopter ↔ Proven-first skeptic
-- Decision-making authority: Autonomous ↔ Approval-dependent
-- Risk posture: Protect current state ↔ Willing to experiment
-
-**Step 2: Map speakers** — For each speaker, note their position on each axis with direct evidence.
-
-**Step 3: Cluster** — Group speakers with similar behavioral profiles. Aim for 3–5 archetypes.
-
-**Step 4: Name** — Name by behavioral trait or role in the system, not job title. The name should be immediately evocative.
-
-Common naming patterns:
-- By role in the system: The Gatekeeper, The Translator, The Operator
-- By relationship to change: The Pragmatist, The Skeptic, The Champion
-- By decision style: The Optimizer, The Risk-Avoider, The Delegator
-
-**Output format:**
-```
 ## 行为原型
-
-### [Archetype Name]
-**核心动机：** [What drives their decisions — not their job KPI, but their underlying concern]
-**典型行为：** [How they act in the context of the research topic — specific, observable]
-**对变化的态度：** [How they respond to new tools, processes, or ideas]
-**核心张力：** [The central unresolved conflict or need this archetype carries]
-**依据：** [Which speakers, what they said]
+**原型名称：** [如：实用主义者/把关人]
+**核心动机与态度：** [驱动决策的底层担忧，面对变化的态度]
 ```
 
----
-
-## 洞察 (Insights)
-
-Non-obvious interpretations that explain WHY things are the way they are. Not summaries — interpretations.
-
-**Bad insight** (summary):
-> "Users said they use Excel to track production data."
-
-**Good insight** (interpretation):
-> "Operators cling to familiar tools even when they know better options exist — the switching cost isn't technical, it's the fear of being exposed as incompetent during the learning curve."
-
-The test: *Would a smart person who wasn't in the room be surprised by this?* If the insight is obvious from the job title or industry, it's a description, not an insight.
-
-### Insight extraction process
-
-1. **First pass** — Flag notable moments: surprising statements, contradictions, emotional language, workarounds, complaints, moments of pride or frustration
-2. **Cluster** — Group observations that share an underlying tension or root cause
-3. **Synthesize** — For each cluster, write ONE insight. Start with the interpretation, not the evidence
-4. **Quality filter** — Apply the "so what?" test: Does it point to a design opportunity or strategic implication? Is it specific to this context? Would it change how you'd design something? If no to all three, cut or merge
-
-**Target: 5–8 insights per session.** More than that means you're summarizing, not synthesizing.
-
-**Output format:**
-```
-## 洞察
-
-### [Short memorable label]
-[One sentence: the core observation, stated as a non-obvious truth about behavior, motivation, or tension]
-
-**依据：** [2–3 specific quotes or behaviors, with speaker reference]
-**含义：** [What this means for product design, strategy, or the next research question]
+### 备选 D：内部讨论类
+```markdown
+## 内部讨论与共识
+**核心分歧/争议：** [各方存在分歧的关键点及各自立场]
+**关键共识：** [大家一致同意或妥协的点]
+**待决事项：** [未解决的遗留问题及下一步责任人]
 ```
 
----
+### 备选 E：深层洞察类 (Insights)
+必须是解释“为什么”的深层非共识理解。
+```markdown
+## 洞察发现
+### [简短精炼的洞察标签]
+[用一句话陈述核心发现：关于行为、动机或张力的非表面事实]
+**依据：** [带上发言人及文档来源，如 @Line 17]
+**含义：** [这对产品设计、战略或下一步调研的指导意义]
+```
 
-## Context-specific guidance: factory / industrial B2B
+## 用户交互纪律
 
-When analyzing manufacturing or industrial B2B research, watch for:
+1. **需要更多上下文信息来支撑的判断和总结**：如果有不确定之处或需要更多上下文信息来支撑分析，主动向用户提问，严禁盲目猜想。
+2. 明确在开始前沟通提取目标，并在过程中遇到重大歧义时随时对齐。
 
-**Common behavioral axes:**
-- Relationship to digital/AI tools (distrust of "black box" vs. curiosity)
-- Proximity to production floor (hands-on operator vs. management layer)
-- Accountability structure (who gets blamed when things go wrong)
-- Time horizon (immediate production pressure vs. long-term transformation)
+## 输出格式要求
 
-**Common archetypes in this context:**
-- **The Pragmatist**: "Show me it works on my line, then we'll talk." Not resistant to change — resistant to unproven change.
-- **The Gatekeeper**: Controls information flow between management and floor. Primary concern: not being caught in the middle.
-- **The Champion**: Wants transformation but lacks authority. Compensates by building internal coalitions.
-- **The Operator**: Focused on immediate task completion. Has the most granular knowledge of actual workflows.
+生成的文档头部必须追加以下提取说明，明确标识本次任务的目标和底线：
 
-These are starting points — derive archetypes from the data, not from this list.
+```markdown
+> 提取说明：本报告基于【用户指定的具体目标，如：功能反馈】进行提取。
+> 所有结论均基于原文依据；材料不足以支撑的部分已省略。
+```
 
----
+## 质量自查清单
 
-## Isolation rule
-
-When working with multi-session research, analyze each session independently. Don't let one session's archetypes or business context contaminate another's.
-
----
-
-## Output checklist
-
-Before presenting results:
-- [ ] Skipped any section where the transcript didn't provide enough material (and noted why)
-- [ ] 业务场景 describes *this* organization, not the industry in general
-- [ ] 用户画像 describes what people actually do, not what they're "responsible for"
-- [ ] Archetypes are named by behavioral trait, not job title; each has a "核心张力"
-- [ ] Insights are interpretations (reveal WHY or a tension), not summaries
-- [ ] Insight count is 5–8; each has specific evidence and an implication
+提交最终报告前自查：
+- [ ] 开始前明确询问并获得了用户的提取目标
+- [ ] 提取报告的结构是否紧扣用户选择的目标，而非僵化套用模板
+- [ ] 严格基于原文事实提取，未脑补或泛泛而谈
+- [ ] 原文材料不足以支撑的部分已跳过或说明
+- [ ] 提取报告头部已包含带有明确目标的提取说明
